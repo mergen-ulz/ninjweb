@@ -18,7 +18,7 @@ export default async function CancelRegistrationPage({ params }) {
       <p>
         Та дахин бүртгүүлэхийг хүсвэл{" "}
         <a href="/register" className="underline text-blue-600">
-          энд дарна уу
+          Энд дарна уу
         </a>
         .
       </p>
