@@ -27,8 +27,9 @@ function RegisterPage() {
   useEffect(() => {
     const fetchPrograms = async () => {
       if (typeof window === "undefined") return;
-      const res = await fetch("/api/public-programs");
+      const res = await fetch("/api/programs");
       const data = await res.json();
+      setPrograms(data.slice(0, 8));
     };
 
     fetchPrograms();
