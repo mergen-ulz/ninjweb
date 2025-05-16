@@ -1,0 +1,24 @@
+.fc .fc-daygrid-event {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ensure margin spacing between stacked events */
+  .fc .fc-daygrid-event-harness {
+    margin-bottom: 4px;
+  }
+  
+  /*  Force background colors to override default */
+  .event-0 { background-color: #107FBB !important; color: white !important; }
+  .event-1 { background-color: #4CAF50 !important; color: white !important; }
+  .event-2 { background-color: #F59E0B !important; color: white !important; }
+  .event-3 { background-color: #EF4444 !important; color: white !important; }
+  .event-4 { background-color: #8B5CF6 !important; color: white !important; }
+  .event-5 { background-color: #10B981 !important; color: white !important; }
+  
