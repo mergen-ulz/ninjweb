@@ -1,12 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 
-export default function RegisterPage() {
+export default function RegisterPageWrapper() {
+  return (
+    <Suspense
+      fallback={<div className="text-center py-20">Түр хүлээнэ үү...</div>}
+    >
+      <RegisterPage />
+    </Suspense>
+  );
+}
+
+function RegisterPage() {
   const searchParams = useSearchParams();
   const preselectedId = searchParams.get("programId") || "";
 
@@ -17,8 +27,9 @@ export default function RegisterPage() {
   useEffect(() => {
     const fetchPrograms = async () => {
       if (typeof window === "undefined") return;
-      const res = await fetch("/api/programs");
+      const res = await fetch("/api/public-programs");
       const data = await res.json();
+      setPrograms(data.slice(0, 3)); // limit to 3 cards
     };
 
     fetchPrograms();
@@ -53,7 +64,6 @@ export default function RegisterPage() {
 
   return (
     <>
-      {/* Hero with NavBar */}
       <div className="relative bg-[#152C5B] text-white flex flex-col justify-center items-center px-4 min-h-screen">
         <div className="absolute top-0 left-0 w-full">
           <NavBar />
@@ -67,7 +77,6 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      {/* Form Section */}
       <main className="bg-[#ECE3DE] py-16 px-4">
         <div className="max-w-2xl mx-auto bg-white p-8 rounded shadow-md font-neue">
           {success && (
@@ -77,7 +86,6 @@ export default function RegisterPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Program Cards */}
             <div>
               <label className="block mb-2 font-semibold text-lg">
                 Хөтөлбөр сонгох
@@ -109,10 +117,8 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* Hidden field to track selectedId */}
             <input type="hidden" name="programId" value={selectedId} />
 
-            {/* Name */}
             <div>
               <label className="block mb-1 font-semibold">Овог нэр</label>
               <input
@@ -123,7 +129,6 @@ export default function RegisterPage() {
               />
             </div>
 
-            {/* Email */}
             <div>
               <label className="block mb-1 font-semibold">Имэйл хаяг</label>
               <input
@@ -134,7 +139,6 @@ export default function RegisterPage() {
               />
             </div>
 
-            {/* Phone */}
             <div>
               <label className="block mb-1 font-semibold">Утасны дугаар</label>
               <input
@@ -145,7 +149,6 @@ export default function RegisterPage() {
               />
             </div>
 
-            {/* Notes */}
             <div>
               <label className="block mb-1 font-semibold">
                 Нэмэлт мэдээлэл
