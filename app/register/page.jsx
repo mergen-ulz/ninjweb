@@ -29,7 +29,6 @@ function RegisterPage() {
       if (typeof window === "undefined") return;
       const res = await fetch("/api/public-programs");
       const data = await res.json();
-      setPrograms(data.slice(0, 3)); // limit to 3 cards
     };
 
     fetchPrograms();
